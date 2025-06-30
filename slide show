@@ -1,0 +1,76 @@
+
+<div class="slides">
+  <div class="slide active"></div>
+  <div class="slide "></div>
+  <div class="slide "></div>
+  <div class="slide "></div>
+  <div class="slide "></div>
+  <div class="slide "></div>
+</div>
+ 
+ <!-- JavaScript -->
+      <script>
+        document
+          .querySelectorAll(".slideshow")
+          .forEach((slideshow, slideshowIndex) => {
+            const slides = slideshow.querySelectorAll(".slide");
+            const indicators = slideshow.querySelector(".indicators");
+            const nextBtn = slideshow.querySelector(".next");
+            const prevBtn = slideshow.querySelector(".prev");
+            let current = 0;
+
+            // Generate indicators
+            slides.forEach((_, i) => {
+              const dot = document.createElement("span");
+              dot.className =
+                "w-3 h-3 bg-gray-400 rounded-full cursor-pointer transition-all inline-block";
+              dot.addEventListener("click", () => goToSlide(i));
+              indicators.appendChild(dot);
+            });
+
+            function updateIndicators() {
+              Array.from(indicators.children).forEach((dot, i) => {
+                dot.classList.toggle("bg-green-400", i === current);
+                dot.classList.toggle("w-8", i === current);
+                dot.classList.toggle("bg-gray-400", i !== current);
+              });
+            }
+
+            function showSlide(index) {
+              slides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === index);
+              });
+              updateIndicators();
+            }
+
+            function goToSlide(index) {
+              current = index;
+              showSlide(current);
+            }
+
+            function nextSlide() {
+              current = (current + 1) % slides.length;
+              showSlide(current);
+            }
+
+            function prevSlide() {
+              current = (current - 1 + slides.length) % slides.length;
+              showSlide(current);
+            }
+
+            // Attach button listeners
+            nextBtn.addEventListener("click", nextSlide);
+            prevBtn.addEventListener("click", prevSlide);
+
+            // Optional: Only enable keyboard navigation for the first slideshow
+            if (slideshowIndex === 0) {
+              document.addEventListener("keydown", (e) => {
+                if (e.key === "ArrowRight") nextSlide();
+                if (e.key === "ArrowLeft") prevSlide();
+              });
+            }
+
+            // Initialize
+            showSlide(current);
+          });
+      </script>
