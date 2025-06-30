@@ -1,3 +1,13 @@
+// this is the css for slide show
+.slide {
+  display: none;
+}
+.slide.active {
+  display: block;
+}
+
+// this is the html for slide show
+
 
 <div class="slides">
   <div class="slide active"></div>
