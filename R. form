@@ -1,3 +1,21 @@
+<-- first of all don't forget to create a google sheet app with this code -->
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Contact Form Responses");
+  
+  //Ensure the sheet exists
+  if(!sheet){
+    throw new Error("Sheet named 'Contact Form Responses' dpes not exists.");
+  }
+
+  //Parse the incoming POST data
+  const data = JSON.parse(e.postData.contents);
+
+  // Append form data to the sheet
+  sheet.appendRow([data.name, data.email,data.country,data.service,data.budget, data.message, new Date()]);
+
+  return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+}
+
 <-- html for form -->
  <div class=" md:w-xl py-6 z-10 border-2 rounded-4xl bg-black/20
            backdrop-blur-xl">
