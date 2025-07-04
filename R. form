@@ -1,3 +1,7 @@
+<--  how to create registration form for your website with Google sheet?? steps down below -->
+<--  step one -->
+
+
 <-- first of all don't forget to create a google sheet app with this code -->
 function doPost(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Contact Form Responses");
@@ -15,6 +19,12 @@ function doPost(e) {
 
   return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
 }
+
+
+<--    then deploy the apps 
+and coffee the app department link and paste on javascript -->
+
+<-- step 3 write the HTML code (code is down below) -->
 
 <-- html for form -->
  <div class=" md:w-xl py-6 z-10 border-2 rounded-4xl bg-black/20
@@ -160,7 +170,8 @@ function doPost(e) {
                 budget: document.getElementById("budget").value,
                 message: document.getElementById("message").value,
               };
-      
+      <--  paste your Google set application link 
+here -->
               try {
                 const response = await fetch(
                   "YOUR--GOOGLE--SHEET--APP--LINK",
